@@ -1,4 +1,4 @@
-mport java.util.ArrayList;
+import java.util.ArrayList;
 
 import org.junit.runner.*;
 import org.junit.runner.notification.*;
@@ -9,8 +9,7 @@ public class TestRunner {
 	ArrayList<Class> classesToTest = new ArrayList<Class>();
 	boolean anyFailures = false;
 
-    classToTest.add(HerokuAppTest.class);
-	classesToTest.add(Foo.class);
+    classesToTest.add(HerokuAppTest.class);
 	
 	// For all test classes added, loop through and use JUnit
 	// to run them.
