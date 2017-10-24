@@ -48,4 +48,27 @@ public class HerokuAppTest{
 
         assertTrue(actual.contains("1!"));
     }
+
+    /**
+        This will be another test for number 5 of the requirements that
+        will test the factorial page. We will enter a floating point number
+        in to the text box.
+    */
+
+    @Test
+    public void facStrTest(){
+        WebElement fac = driver.findElement(By.linkText("Factorial"));
+        fac.click();
+
+        WebElement textBox = driver.findElement(By.cssSelector("input[name='value']"));
+        textBox.sendKeys("1.0");
+
+        WebElement submit = driver.findElement(By.cssSelector("input[value='Submit']"));
+        submit.click();
+
+        WebElement textArea = driver.findElement(By.cssSelector("jumbotron"));
+        String actual = textArea.getText();
+
+        assertTrue(actual.contains("1!"));
+    }
 }
