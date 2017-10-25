@@ -66,9 +66,40 @@ public class HerokuAppTest{
         WebElement submit = driver.findElement(By.cssSelector("input[value='Submit']"));
         submit.click();
 
-        WebElement textArea = driver.findElement(By.cssSelector("jumbotron"));
+        WebElement textArea = driver.findElement(By.className("jumbotron"));
         String actual = textArea.getText();
 
         assertTrue(actual.contains("1!"));
     }
+
+    /**
+        This will be a test for number 6 in the requirments.
+        We will go to the URL https://cs1632ex.herokuapp.com/hello
+        and see if the large text displayed says "Hello CS1632, from Prof. Laboon!"
+    */
+    @Test 
+    public void helloURLTest(){
+         driver.get("https://cs1632ex.herokuapp.com/hello");
+
+         WebElement jumbotron = driver.findElement(By.className("jumbotron"));
+         String actual = jumbotron.getText();
+
+         assertTrue(actual.equals("Hello CS1632, from Prof. Laboon!"));
+    }
+
+        /**
+        This will be a test for number 7 in the requirments.
+        We will go to the URL https://cs1632ex.herokuapp.com/hello/meow
+        and see if the large text displayed says "Hello CS1632, from meow!"
+    */
+    @Test 
+    public void trailingURLTest(){
+         driver.get("https://cs1632ex.herokuapp.com/hello/meow");
+
+         WebElement jumbotron = driver.findElement(By.className("jumbotron"));
+         String actual = jumbotron.getText();
+
+         assertTrue(actual.equals("Hello CS1632, from meow"));
+    }
+    
 }
