@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import java.util.*;
 
 public class HerokuAppTest{
     static WebDriver driver = new HtmlUnitDriver();
@@ -100,6 +101,23 @@ public class HerokuAppTest{
          String actual = jumbotron.getText();
 
          assertTrue(actual.equals("Hello CS1632, from meow"));
+    }
+
+
+    /**
+        This will go to the cathy page and count how many pictures there are and 
+        make sure there are 3.
+    */
+    @Test
+    public void cathyCountTest(){
+
+        WebElement cathyButton = driver.findElement(By.linkText("Cathedral Pics"));
+        cathyButton.click();
+
+        List<WebElement> picList = driver.findElements(By.cssSelector("img"));
+        int actual = picList.size();
+        System.out.println("SIZE: "+actual);
+        assertEquals(actual, 3);
     }
     
 }
