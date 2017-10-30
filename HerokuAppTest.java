@@ -1,25 +1,83 @@
 import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import java.util.logging.*;
+import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.logging.*;
+import org.openqa.selenium.remote.*;
 import java.util.*;
 
 public class HerokuAppTest{
-    static WebDriver driver = new HtmlUnitDriver();
+    static WebDriver driver;
+    //Start at the home page for each test
 
+    @BeforeClass
+    public static void setUpDriver(){
+        java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+        System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+        driver = new HtmlUnitDriver();
+    }
     @Before
-    public void setup(){
+    public void setup() throws Exception{
         driver.get("https://cs1632ex.herokuapp.com/");
     }
+
+    //Check that the title contains the word "CS1632" on the home page
     @Test
     public void Test(){
         String title = driver.getTitle();
         assertTrue(title.contains("CS1632"));
     }
+    
+    //Check header links on home page
+    @Test
+    public void testHeaderLinksHome() throws Exception{
+        try{
+            driver.findElement(By.linkText("CS1632 D3 Home"));
+            driver.findElement(By.linkText("Factorial"));
+            driver.findElement(By.linkText("Fibonacci"));
+            driver.findElement(By.linkText("Hello"));
+            driver.findElement(By.linkText("Cathedral Pics"));
+        } catch(Exception e){
+            fail();
+        }
+    }
 
+    //Check header links on Factorial page
+    @Test
+    public void testHeaderLinksFactorialPage(){
+        driver.get("https://cs1632ex.herokuapp.com/fact");
+         try{
+            driver.findElement(By.linkText("CS1632 D3 Home"));
+            driver.findElement(By.linkText("Factorial"));
+            driver.findElement(By.linkText("Fibonacci"));
+            driver.findElement(By.linkText("Hello"));
+            driver.findElement(By.linkText("Cathedral Pics"));
+        } catch(Exception e){
+            fail();
+        }
+    }
+    
+
+    //Check header linkes on Fibonacci page
+    @Test
+    public void testHeaderLinksFibonacciPage(){
+        driver.get("https://cs1632ex.herokuapp.com/fib");
+        try{
+            driver.findElement(By.linkText("CS1632 D3 Home"));
+            driver.findElement(By.linkText("Factorial"));
+            driver.findElement(By.linkText("Fibonacci"));
+            driver.findElement(By.linkText("Hello"));
+            driver.findElement(By.linkText("Cathedral Pics"));
+        } catch(Exception e){
+            fail();
+        }
+    }
+
+    //Check header linkes on Hello page
+    
     @Test
     public void testWelcomeMsg(){
         WebElement e = driver.findElement(By.className("lead"));
