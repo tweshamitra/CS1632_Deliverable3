@@ -51,8 +51,75 @@ public class HerokuAppTest{
     }
 
     /**
+        This is the first test for number 5 of the requirements
+        We will go to the Fibonacci page and enter the value 
+        "1.02" and see if the value is 1
+    */
+    @Test
+    public void fibFloatTest(){
+        WebElement fib = driver.findElement(By.linkText("Fibonacci"));
+        fib.click();
+
+        WebElement textBox = driver.findElement(By.id("tb1"));
+        textBox.sendKeys("1.02");
+
+        WebElement submit = driver.findElement(By.id("sub"));
+        submit.click();
+
+        WebElement textArea = driver.findElement(By.className("jumbotron"));
+        String actual = textArea.getText();
+
+        assertTrue(actual.contains("1!"));
+    }
+
+    /**
+        This is the first test for number 5 of the requirements
+        We will go to the Fibonacci page and enter a large integer
+        and see if the value is 1
+    */
+    @Test
+    public void fibBigTest(){
+        WebElement fib = driver.findElement(By.linkText("Fibonacci"));
+        fib.click();
+
+        WebElement textBox = driver.findElement(By.id("tb1"));
+        textBox.sendKeys("100000000000000000000000000000");
+
+        WebElement submit = driver.findElement(By.id("sub"));
+        submit.click();
+
+        WebElement textArea = driver.findElement(By.className("jumbotron"));
+        String actual = textArea.getText();
+
+        assertTrue(actual.contains("1!"));
+    }
+
+    /**
         This will be another test for number 5 of the requirements that
         will test the factorial page. We will enter a floating point number
+        in to the text box.
+    */
+
+    @Test
+    public void facFloatTest(){
+        WebElement fac = driver.findElement(By.linkText("Factorial"));
+        fac.click();
+
+        WebElement textBox = driver.findElement(By.cssSelector("input[name='value']"));
+        textBox.sendKeys("1.0");
+
+        WebElement submit = driver.findElement(By.cssSelector("input[value='Submit']"));
+        submit.click();
+
+        WebElement textArea = driver.findElement(By.className("jumbotron"));
+        String actual = textArea.getText();
+
+        assertTrue(actual.contains("1!"));
+    }
+
+    /**
+        This will be another test for number 5 of the requirements that
+        will test the factorial page. We will enter a string "stuff"
         in to the text box.
     */
 
@@ -62,7 +129,30 @@ public class HerokuAppTest{
         fac.click();
 
         WebElement textBox = driver.findElement(By.cssSelector("input[name='value']"));
-        textBox.sendKeys("1.0");
+        textBox.sendKeys("stuff");
+
+        WebElement submit = driver.findElement(By.cssSelector("input[value='Submit']"));
+        submit.click();
+
+        WebElement textArea = driver.findElement(By.className("jumbotron"));
+        String actual = textArea.getText();
+
+        assertTrue(actual.contains("1!"));
+    }
+
+       /**
+        This will be another test for number 5 of the requirements that
+        will test the factorial page. We will enter a large integer
+        in to the text box.
+    */
+
+    @Test
+    public void facBigTest(){
+        WebElement fac = driver.findElement(By.linkText("Factorial"));
+        fac.click();
+
+        WebElement textBox = driver.findElement(By.cssSelector("input[name='value']"));
+        textBox.sendKeys("10000000000000000000000000000000000000000000");
 
         WebElement submit = driver.findElement(By.cssSelector("input[value='Submit']"));
         submit.click();
@@ -101,6 +191,21 @@ public class HerokuAppTest{
          String actual = jumbotron.getText();
 
          assertTrue(actual.equals("Hello CS1632, from meow"));
+    }
+
+            /**
+        This will be a test for number 7 in the requirments.
+        We will go to the URL https://cs1632ex.herokuapp.com/hello/22
+        and see if the large text displayed says "Hello CS1632, from meow!"
+    */
+    @Test 
+    public void trailingURLNumTest(){
+         driver.get("https://cs1632ex.herokuapp.com/hello/22");
+
+         WebElement jumbotron = driver.findElement(By.className("jumbotron"));
+         String actual = jumbotron.getText();
+
+         assertTrue(actual.equals("Hello CS1632, from 22"));
     }
 
 
